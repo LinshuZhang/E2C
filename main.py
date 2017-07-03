@@ -15,12 +15,12 @@ def get_word_meaning(word):
     word_xpath = {}
     word_xpath['name'] = '//*[@id="entryContent"]/div[3]/div/div[2]/div/div/div[1]/div[1]/h2/span[1]/span'
     if html.xpath(word_xpath['name']) == []:
-        print 'Sorry, I can not find this word'
+        print ('Sorry, I can not find this word')
         return False
     word['name'] = html.xpath(word_xpath['name'])[0].text
     word_xpath['phonetic_symbol'] = '//*[@id="entryContent"]/div[3]/div/div[2]/div/div/div/div[1]/span[2]/span[2]/span/span'
     if html.xpath(word_xpath['phonetic_symbol']) == []:
-        print 'Sorry, I can not find the phonetic symbol of this word'
+        print ('Sorry, I can not find the phonetic symbol of this word')
         word['phonetic_symbol'] = ''
     else:
         word['phonetic_symbol'] = html.xpath(word_xpath['phonetic_symbol'])[0].text
@@ -31,17 +31,17 @@ def get_word_meaning(word):
     for meaning in word['meaning'][1:-2]:
         meaning_count += 1
         new_content += '\t%d.\t%s\n'%(meaning_count, meaning)
-    print new_content
+    print(new_content)
     return new_content
 
 
 def is_a_word(word):
     word_test = re.compile('^[a-z]+$')
     if word_test.match(word):
-        print '============================'
+        print('============================')
         return True
     else:
-        print "XXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+        print("XXXXXXXXXXXXXXXXXXXXXXXXXXXX")
         return False
 
 file_name = 'new_word@%s.md'%datetime.today().strftime('%m-%d')
